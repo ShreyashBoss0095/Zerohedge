@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest # Using the official MongoDB image
+          ports:
+            - containerPort: 27017 # MongoDB default port
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db # MongoDB data directory
+      volumes:
+        - name: mongo-storage
+          emptyDir: {} # Create a temporary empty volume for this example (could be PersistentVolume in production)

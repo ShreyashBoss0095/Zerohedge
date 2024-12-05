@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80 # Expose this port externally
+      targetPort: 80 # The port your frontend is running on
+  type: LoadBalancer # Exposes the service externally (works if you're using cloud provider, or use NodePort if using Minikube)

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 3 # Number of replicas
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: oscker.io/library/main_project-backend:latest # Replace with your Docker Hub image
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_URI
+              value: "mmongodb://localhost:27017/evolvenode" # MongoDB connection URI

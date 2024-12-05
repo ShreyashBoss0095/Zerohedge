@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 80 # Expose this port externally
+      targetPort: 3000 # The port your backend is running on
+  type: LoadBalancer # Exposes the service externally (works if you're using cloud provider, or use NodePort if using Minikube)
